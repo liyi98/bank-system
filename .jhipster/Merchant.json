@@ -1,0 +1,51 @@
+{
+  "applications": "*",
+  "changelogDate": "20230521010402",
+  "clientRootFolder": "bank",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "merchant",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "bank",
+  "name": "Merchant",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "creditCardTransaction",
+      "otherEntityRelationshipName": "merchant",
+      "ownerSide": false,
+      "relationshipName": "creditCardTransaction",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

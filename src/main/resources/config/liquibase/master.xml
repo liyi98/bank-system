@@ -11,7 +11,15 @@
     <property name="datetimeType" value="datetime(6)" dbms="mysql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230521010357_added_entity_BankUser.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230521010358_added_entity_CreditCardType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230521010359_added_entity_CreditCardApplicant.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230521010400_added_entity_CreditCardHolder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230521010401_added_entity_CreditCardTransaction.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230521010402_added_entity_Merchant.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20230521010359_added_entity_constraints_CreditCardApplicant.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230521010401_added_entity_constraints_CreditCardTransaction.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

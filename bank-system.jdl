@@ -1,0 +1,155 @@
+
+enum StandardStatus {
+    P, A, I
+}
+
+enum HouseLoanType {
+    F
+}
+
+enum CarLoanType {
+    F
+}
+
+enum CreditCardHolderStatus {
+    C, A, S
+}
+
+enum UserStatus {
+    F
+}
+
+
+
+entity Merchant {
+    name String
+    address String
+    createdDate Instant
+    createdBy String
+    lastModifiedDate Instant
+    lastModifiedBy String
+}
+
+entity PersonalLoan {
+    period String
+    interest BigDecimal
+    createdDate Instant
+    createdBy String
+    lastModifiedDate Instant
+    lastModifiedBy String
+}
+
+entity PersonalLoanApplicant {
+    status StandardStatus 
+    icPath String
+    payslipPath String
+    epfPath String
+    loanAmount BigDecimal
+}
+
+entity PersonalLoanTransaction {
+    balance BigDecimal
+    description String
+    createdDate Instant
+    createdBy String
+    lastModifiedDate Instant
+    lastModifiedBy String
+}
+
+entity User {
+    login String 
+    password String
+    firstName String required
+    lastName String required
+    status UserStatus
+    dob LocalDate
+    ic String
+    email String
+    phone String
+    address String 
+    postCode String
+    referralCode String
+    profileImagePath String
+    createdDate Instant
+    createdBy String
+    lastModifiedDate Instant
+    lastModifiedBy String
+}
+
+entity CreditCard {
+    name String
+    minimumAnnual BigDecimal
+    firstDescription String
+    secondDescription String
+    thirdDescription String
+    fourthDescription String
+    imagePath String
+    createdDate Instant
+    createdBy String
+    lastModifiedDate Instant
+    lastModifiedBy String
+}
+
+entity CreditCardHolder {
+    cardNumber Integer
+    name String
+    expiredDate Date
+    secureNumber Integer
+    createdDate Instant
+    createdBy String
+    lastModifiedDate Instant
+    lastModifiedBy String
+}
+
+entity CreditCardTransaction {
+    balance BigDecimal
+    description String
+    createdDate Instant
+    createdBy String
+    lastModifiedDate Instant
+    lastModifiedBy String
+}
+
+entity CreditCardApplicant {
+    status StandardStatus 
+    icPath String
+    payslipPath String
+    epfPath String
+    limitAmount BigDecimal
+}
+
+entity HouseLoanApplicant {
+    type HouseLoanType
+    status StandardStatus 
+    icPath String
+    payslipPath String
+    epfPath String
+    loanAmount BigDecimal
+}
+
+
+entity CarLoanApplicant {
+    type CarLoanType
+    status StandardStatus 
+    icPath String
+    payslipPath String
+    epfPath String
+    loanAmount BigDecimal
+}
+
+relationship OneToOne {
+    Card to Applicant
+}
+
+
+relationship ManyToOne {
+    Applicant to User
+    Applicant to CreditCard
+    HouseLoanApplicant to User
+    CarLoanApplicant to User
+    PersonalLoanApplicant to User
+    PersonalLoanApplicant to PersonalLoan
+    CreditCardHolder To Applicant
+    CreditCardTransaction To Applicant
+    CreditCardTransaction To Merchant
+}

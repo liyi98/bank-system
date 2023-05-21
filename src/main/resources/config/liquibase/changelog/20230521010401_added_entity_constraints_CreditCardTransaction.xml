@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity CreditCardTransaction.
+    -->
+    <changeSet id="20230521010401-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="credit_card_holder_id"
+                                 baseTableName="credit_card_transaction"
+                                 constraintName="fk_credit_card_transaction__credit_card_holder_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="credit_card_holder"/>
+
+        <addForeignKeyConstraint baseColumnNames="credit_card_transaction_id"
+                                 baseTableName="rel_credit_card_transaction__merchant"
+                                 constraintName="fk_rel_credit_card_transaction___credit_card_transaction_58_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="credit_card_transaction"/>
+
+        <addForeignKeyConstraint baseColumnNames="merchant_id"
+                                 baseTableName="rel_credit_card_transaction__merchant"
+                                 constraintName="fk_rel_credit_card_transaction__merchant__merchant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="merchant"/>
+    </changeSet>
+</databaseChangeLog>

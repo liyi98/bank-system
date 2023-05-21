@@ -76,6 +76,18 @@ public class CacheConfiguration {
     @Bean
     public JCacheManagerCustomizer cacheManagerCustomizer(javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration) {
         return cm -> {
+            createCache(cm, com.bank.app.domain.BankUser.class.getName(), jcacheConfiguration);
+            createCache(cm, com.bank.app.domain.BankUser.class.getName() + ".creditCardApplicants", jcacheConfiguration);
+            createCache(cm, com.bank.app.domain.CreditCardType.class.getName(), jcacheConfiguration);
+            createCache(cm, com.bank.app.domain.CreditCardType.class.getName() + ".creditCardApplicants", jcacheConfiguration);
+            createCache(cm, com.bank.app.domain.CreditCardApplicant.class.getName(), jcacheConfiguration);
+            createCache(cm, com.bank.app.domain.CreditCardApplicant.class.getName() + ".creditCardTypes", jcacheConfiguration);
+            createCache(cm, com.bank.app.domain.CreditCardHolder.class.getName(), jcacheConfiguration);
+            createCache(cm, com.bank.app.domain.CreditCardHolder.class.getName() + ".creditCardTransactions", jcacheConfiguration);
+            createCache(cm, com.bank.app.domain.CreditCardTransaction.class.getName(), jcacheConfiguration);
+            createCache(cm, com.bank.app.domain.CreditCardTransaction.class.getName() + ".merchants", jcacheConfiguration);
+            createCache(cm, com.bank.app.domain.Merchant.class.getName(), jcacheConfiguration);
+            createCache(cm, com.bank.app.domain.Merchant.class.getName() + ".creditCardTransactions", jcacheConfiguration);
             // jhipster-needle-redis-add-entry
         };
     }

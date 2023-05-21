@@ -1,0 +1,65 @@
+{
+  "applications": "*",
+  "changelogDate": "20230521010400",
+  "clientRootFolder": "bank",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "credit_card_holder",
+  "fields": [
+    {
+      "fieldName": "cardNumber",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "expiredDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "secureNumber",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "bank",
+  "name": "CreditCardHolder",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "creditCardApplicant",
+      "otherEntityRelationshipName": "creditCardHolder",
+      "ownerSide": false,
+      "relationshipName": "creditCardApplicant",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "creditCardTransaction",
+      "otherEntityRelationshipName": "creditCardHolder",
+      "relationshipName": "creditCardTransaction",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

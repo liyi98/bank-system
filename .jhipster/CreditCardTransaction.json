@@ -1,0 +1,57 @@
+{
+  "applications": "*",
+  "changelogDate": "20230521010401",
+  "clientRootFolder": "bank",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "credit_card_transaction",
+  "fields": [
+    {
+      "fieldName": "balance",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "bank",
+  "name": "CreditCardTransaction",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "creditCardHolder",
+      "otherEntityRelationshipName": "creditCardTransaction",
+      "relationshipName": "creditCardHolder",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "merchant",
+      "otherEntityRelationshipName": "creditCardTransaction",
+      "ownerSide": true,
+      "relationshipName": "merchant",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

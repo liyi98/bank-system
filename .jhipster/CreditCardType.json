@@ -1,0 +1,71 @@
+{
+  "applications": "*",
+  "changelogDate": "20230521010358",
+  "clientRootFolder": "bank",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "credit_card_type",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "minimumAnnual",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "firstDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "secondDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "thirdDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fourthDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "imagePath",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "bank",
+  "name": "CreditCardType",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "creditCardApplicant",
+      "otherEntityRelationshipName": "creditCardType",
+      "ownerSide": false,
+      "relationshipName": "creditCardApplicant",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

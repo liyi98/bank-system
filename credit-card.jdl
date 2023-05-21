@@ -1,0 +1,103 @@
+enum StandardStatus {
+    P, A, I
+}
+
+// A -> Active I -> Inactive
+enum UserStatus {
+    A, I
+}
+
+entity BankUser {
+    login String 
+    password String
+    firstName String required
+    lastName String required
+    status UserStatus
+    dob LocalDate
+    ic String
+    email String
+    phone String
+    address String 
+    postCode String
+    referralCode String
+    profileImagePath String
+    createdDate Instant
+    createdBy String
+    lastModifiedDate Instant
+    lastModifiedBy String
+}
+
+
+entity CreditCardType {
+    name String
+    minimumAnnual BigDecimal
+    firstDescription String
+    secondDescription String
+    thirdDescription String
+    fourthDescription String
+    imagePath String
+    createdDate Instant
+    createdBy String
+    lastModifiedDate Instant
+    lastModifiedBy String
+}
+
+
+entity CreditCardApplicant {
+    status StandardStatus 
+    icPath String
+    payslipPath String
+    epfPath String
+    limitAmount BigDecimal
+    createdDate Instant
+    createdBy String
+    lastModifiedDate Instant
+    lastModifiedBy String
+}
+
+entity CreditCardHolder {
+    cardNumber Integer
+    name String
+    expiredDate LocalDate
+    secureNumber Integer
+    createdDate Instant
+    createdBy String
+    lastModifiedDate Instant
+    lastModifiedBy String
+}
+
+
+entity CreditCardTransaction {
+    balance BigDecimal
+    description String
+    createdDate Instant
+    createdBy String
+    lastModifiedDate Instant
+    lastModifiedBy String
+}
+
+entity Merchant {
+    name String
+    address String
+    createdDate Instant
+    createdBy String
+    lastModifiedDate Instant
+    lastModifiedBy String
+}
+
+relationship OneToOne {
+    CreditCardApplicant to CreditCardHolder
+}
+
+relationship ManyToOne {
+    CreditCardApplicant to BankUser
+    CreditCardTransaction to CreditCardHolder
+}
+
+relationship ManyToMany {
+    CreditCardApplicant to CreditCardType
+    CreditCardTransaction to Merchant
+}
+
+dto * with mapstruct
+service * with serviceClass

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity CreditCardApplicant.
+    -->
+    <changeSet id="20230521010359-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="credit_card_holder_id"
+                                 baseTableName="credit_card_applicant"
+                                 constraintName="fk_credit_card_applicant__credit_card_holder_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="credit_card_holder"/>
+
+        <addForeignKeyConstraint baseColumnNames="bank_user_id"
+                                 baseTableName="credit_card_applicant"
+                                 constraintName="fk_credit_card_applicant__bank_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="bank_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="credit_card_applicant_id"
+                                 baseTableName="rel_credit_card_applicant__credit_card_type"
+                                 constraintName="fk_rel_credit_card_applicant__c__credit_card_applicant_da_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="credit_card_applicant"/>
+
+        <addForeignKeyConstraint baseColumnNames="credit_card_type_id"
+                                 baseTableName="rel_credit_card_applicant__credit_card_type"
+                                 constraintName="fk_rel_credit_card_applicant__c__credit_card_type_93_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="credit_card_type"/>
+    </changeSet>
+</databaseChangeLog>
