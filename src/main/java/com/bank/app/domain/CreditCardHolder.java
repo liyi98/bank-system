@@ -7,7 +7,13 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -53,6 +59,12 @@ public class CreditCardHolder implements Serializable {
 
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
+
+    @Column(name = "bank_user_id")
+    private Long bankUserId;
+
+    @Column(name = "credit_card_type_id")
+    private Long creditCardTypeId;
 
     @OneToMany(mappedBy = "creditCardHolder")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -189,6 +201,32 @@ public class CreditCardHolder implements Serializable {
 
     public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
+    }
+
+    public Long getBankUserId() {
+        return this.bankUserId;
+    }
+
+    public CreditCardHolder bankUserId(Long bankUserId) {
+        this.setBankUserId(bankUserId);
+        return this;
+    }
+
+    public void setBankUserId(Long bankUserId) {
+        this.bankUserId = bankUserId;
+    }
+
+    public Long getCreditCardTypeId() {
+        return this.creditCardTypeId;
+    }
+
+    public CreditCardHolder creditCardTypeId(Long creditCardTypeId) {
+        this.setCreditCardTypeId(creditCardTypeId);
+        return this;
+    }
+
+    public void setCreditCardTypeId(Long creditCardTypeId) {
+        this.creditCardTypeId = creditCardTypeId;
     }
 
     public Set<CreditCardTransaction> getCreditCardTransactions() {

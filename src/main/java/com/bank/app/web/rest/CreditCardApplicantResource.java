@@ -4,18 +4,27 @@ import com.bank.app.repository.CreditCardApplicantRepository;
 import com.bank.app.service.CreditCardApplicantService;
 import com.bank.app.service.FileStorageService;
 import com.bank.app.service.dto.CreditCardApplicantDTO;
+import com.bank.app.service.exception.CreditCardException;
 import com.bank.app.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import jodd.net.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
@@ -82,6 +91,25 @@ public class CreditCardApplicantResource {
             .created(new URI("/api/credit-card-applicants/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    /**
+     * {@code POST  /credit-card-applicants} : Create a new creditCardApplicant.
+     *
+     * @param creditCardApplicantDTO the creditCardApplicantDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new creditCardApplicantDTO, or with status {@code 400 (Bad Request)} if the creditCardApplicant has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     * @throws CreditCardException
+     */
+    @PostMapping("/credit-card/approve")
+    public ResponseEntity<?> approve(@RequestBody CreditCardApplicantDTO creditCardApplicantDTO)
+        throws URISyntaxException, CreditCardException {
+        log.debug("REST request to approve CreditCardApplicant : {}", creditCardApplicantDTO);
+        if (creditCardApplicantDTO.getId() == null) {
+            throw new BadRequestAlertException("Invalid Param", ENTITY_NAME, "Invalid Param");
+        }
+        creditCardApplicantService.approve(creditCardApplicantDTO.getId());
+        return ResponseEntity.ok("Success");
     }
 
     /**

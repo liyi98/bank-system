@@ -35,6 +35,9 @@ public class CreditCardApplicant extends AbstractAuditingEntity<CreditCardApplic
     @Column(name = "ic")
     private String ic;
 
+    @Column(name = "email")
+    private String email;
+
     @Column(name = "dob")
     private LocalDate dob;
 
@@ -92,7 +95,7 @@ public class CreditCardApplicant extends AbstractAuditingEntity<CreditCardApplic
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
-        return this.getId();
+        return this.id;
     }
 
     public CreditCardApplicant id(Long id) {
@@ -128,6 +131,19 @@ public class CreditCardApplicant extends AbstractAuditingEntity<CreditCardApplic
 
     public void setStatus(StandardStatus status) {
         this.status = status;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public CreditCardApplicant email(String email) {
+        this.setIc(email);
+        return this;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getIc() {

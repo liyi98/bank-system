@@ -1,7 +1,11 @@
 package com.bank.app.repository;
 
 import com.bank.app.domain.CreditCardHolder;
-import org.springframework.data.jpa.repository.*;
+import java.math.BigDecimal;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,4 +13,11 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface CreditCardHolderRepository extends JpaRepository<CreditCardHolder, Long> {}
+public interface CreditCardHolderRepository extends JpaRepository<CreditCardHolder, Long> {
+    @Modifying
+    @Query(
+        "update CreditCardHolder c set c.bankUserId = :bankUserId and c.limitAmount = :limitAmount " +
+        "where (SELECT cc.max(id) FROM CreditCardHolder)"
+    )
+    int updateBankUserIdAndLimit(@Param("bankUserId") Long bankUserId, @Param("limitAmount") BigDecimal limitAmount);
+}

@@ -1,5 +1,6 @@
 package com.bank.app.service.dto;
 
+import com.bank.app.domain.CreditCardApplicant;
 import com.bank.app.domain.enumeration.StandardStatus;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -20,6 +21,8 @@ public class CreditCardApplicantDTO implements Serializable {
     private StandardStatus status;
 
     private String ic;
+
+    private String email;
 
     private LocalDate dob;
 
@@ -87,6 +90,14 @@ public class CreditCardApplicantDTO implements Serializable {
 
     public void setIc(String ic) {
         this.ic = ic;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public LocalDate getDob() {
