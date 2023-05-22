@@ -8,9 +8,49 @@
   "entityTableName": "credit_card_applicant",
   "fields": [
     {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "status",
       "fieldType": "StandardStatus",
       "fieldValues": "P,A,I"
+    },
+    {
+      "fieldName": "ic",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dob",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sector",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "companyName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "serviceLength",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "annualIncome",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "occupation",
+      "fieldType": "String"
     },
     {
       "fieldName": "icPath",
@@ -23,10 +63,6 @@
     {
       "fieldName": "epfPath",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "limitAmount",
-      "fieldType": "BigDecimal"
     },
     {
       "fieldName": "createdDate",
@@ -43,6 +79,18 @@
     {
       "fieldName": "lastModifiedBy",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "bankUserId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "creditCardHolderId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "creditCardTypeId",
+      "fieldType": "Long"
     }
   ],
   "fluentMethods": true,
@@ -51,27 +99,6 @@
   "name": "CreditCardApplicant",
   "pagination": "no",
   "readOnly": false,
-  "relationships": [
-    {
-      "otherEntityName": "creditCardHolder",
-      "otherEntityRelationshipName": "creditCardApplicant",
-      "ownerSide": true,
-      "relationshipName": "creditCardHolder",
-      "relationshipType": "one-to-one"
-    },
-    {
-      "otherEntityName": "bankUser",
-      "otherEntityRelationshipName": "creditCardApplicant",
-      "relationshipName": "bankUser",
-      "relationshipType": "many-to-one"
-    },
-    {
-      "otherEntityName": "creditCardType",
-      "otherEntityRelationshipName": "creditCardApplicant",
-      "ownerSide": true,
-      "relationshipName": "creditCardType",
-      "relationshipType": "many-to-many"
-    }
-  ],
+  "relationships": [],
   "service": "serviceClass"
 }

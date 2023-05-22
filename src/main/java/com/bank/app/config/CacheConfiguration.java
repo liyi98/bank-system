@@ -88,6 +88,13 @@ public class CacheConfiguration {
             createCache(cm, com.bank.app.domain.CreditCardTransaction.class.getName() + ".merchants", jcacheConfiguration);
             createCache(cm, com.bank.app.domain.Merchant.class.getName(), jcacheConfiguration);
             createCache(cm, com.bank.app.domain.Merchant.class.getName() + ".creditCardTransactions", jcacheConfiguration);
+            createCache(cm, com.bank.app.domain.BankUser.class.getName() + ".personalLoanApplicants", jcacheConfiguration);
+            createCache(cm, com.bank.app.domain.PersonalLoan.class.getName(), jcacheConfiguration);
+            createCache(cm, com.bank.app.domain.PersonalLoan.class.getName() + ".personalLoanApplicants", jcacheConfiguration);
+            createCache(cm, com.bank.app.domain.PersonalLoanApplicant.class.getName(), jcacheConfiguration);
+            createCache(cm, com.bank.app.domain.PersonalLoanApplicant.class.getName() + ".personalLoanTransactions", jcacheConfiguration);
+            createCache(cm, com.bank.app.domain.PersonalLoanApplicant.class.getName() + ".personalLoans", jcacheConfiguration);
+            createCache(cm, com.bank.app.domain.PersonalLoanTransaction.class.getName(), jcacheConfiguration);
             // jhipster-needle-redis-add-entry
         };
     }

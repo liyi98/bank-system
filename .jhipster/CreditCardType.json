@@ -58,14 +58,6 @@
   "name": "CreditCardType",
   "pagination": "no",
   "readOnly": false,
-  "relationships": [
-    {
-      "otherEntityName": "creditCardApplicant",
-      "otherEntityRelationshipName": "creditCardType",
-      "ownerSide": false,
-      "relationshipName": "creditCardApplicant",
-      "relationshipType": "many-to-many"
-    }
-  ],
+  "relationships": [],
   "service": "serviceClass"
 }

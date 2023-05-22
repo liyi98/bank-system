@@ -43,16 +43,28 @@ entity CreditCardType {
 }
 
 
-entity CreditCardApplicant {
+entity CreditCardApplicant { 
+    name String
     status StandardStatus 
+    ic String
+    dob LocalDate
+    address String
+    phone String
+    sector String
+    companyName String
+    serviceLength BigDecimal
+    annualIncome BigDecimal
+    occupation String
     icPath String
     payslipPath String
     epfPath String
-    limitAmount BigDecimal
     createdDate Instant
     createdBy String
     lastModifiedDate Instant
     lastModifiedBy String
+    bankUserId Long
+    creditCardHolderId Long
+    creditCardTypeId Long
 }
 
 entity CreditCardHolder {
@@ -60,6 +72,7 @@ entity CreditCardHolder {
     name String
     expiredDate LocalDate
     secureNumber Integer
+    limitAmount BigDecimal
     createdDate Instant
     createdBy String
     lastModifiedDate Instant
@@ -85,18 +98,46 @@ entity Merchant {
     lastModifiedBy String
 }
 
-relationship OneToOne {
-    CreditCardApplicant to CreditCardHolder
+entity PersonalLoan {
+    period String
+    interest BigDecimal
+    type String
+    createdDate Instant
+    createdBy String
+    lastModifiedDate Instant
+    lastModifiedBy String
 }
 
+entity PersonalLoanApplicant {
+    status StandardStatus 
+    icPath String
+    payslipPath String
+    epfPath String
+    loanAmount BigDecimal
+}
+
+entity PersonalLoanTransaction {
+    balance BigDecimal
+    description String
+    createdDate Instant
+    createdBy String
+    lastModifiedDate Instant
+    lastModifiedBy String
+}
+
+// relationship OneToOne {
+//     CreditCardApplicant to CreditCardHolder
+// }
+
 relationship ManyToOne {
-    CreditCardApplicant to BankUser
+    PersonalLoanApplicant to BankUser
     CreditCardTransaction to CreditCardHolder
+    PersonalLoanTransaction to PersonalLoanApplicant
 }
 
 relationship ManyToMany {
-    CreditCardApplicant to CreditCardType
     CreditCardTransaction to Merchant
+    PersonalLoan to PersonalLoanApplicant
 }
 
 dto * with mapstruct

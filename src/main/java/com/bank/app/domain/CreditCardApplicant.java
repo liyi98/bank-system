@@ -1,12 +1,10 @@
 package com.bank.app.domain;
 
 import com.bank.app.domain.enumeration.StandardStatus;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.LocalDate;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -18,7 +16,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name = "credit_card_applicant")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SuppressWarnings("common-java:DuplicatedBlocks")
-public class CreditCardApplicant implements Serializable {
+public class CreditCardApplicant extends AbstractAuditingEntity<CreditCardApplicant> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -27,9 +25,39 @@ public class CreditCardApplicant implements Serializable {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
+    private String name;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private StandardStatus status;
+
+    @Column(name = "ic")
+    private String ic;
+
+    @Column(name = "dob")
+    private LocalDate dob;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "sector")
+    private String sector;
+
+    @Column(name = "company_name")
+    private String companyName;
+
+    @Column(name = "service_length", precision = 21, scale = 2)
+    private BigDecimal serviceLength;
+
+    @Column(name = "annual_income", precision = 21, scale = 2)
+    private BigDecimal annualIncome;
+
+    @Column(name = "occupation")
+    private String occupation;
 
     @Column(name = "ic_path")
     private String icPath;
@@ -39,9 +67,6 @@ public class CreditCardApplicant implements Serializable {
 
     @Column(name = "epf_path")
     private String epfPath;
-
-    @Column(name = "limit_amount", precision = 21, scale = 2)
-    private BigDecimal limitAmount;
 
     @Column(name = "created_date")
     private Instant createdDate;
@@ -55,29 +80,19 @@ public class CreditCardApplicant implements Serializable {
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
 
-    @JsonIgnoreProperties(value = { "creditCardApplicant", "creditCardTransactions" }, allowSetters = true)
-    @OneToOne
-    @JoinColumn(unique = true)
-    private CreditCardHolder creditCardHolder;
+    @Column(name = "bank_user_id")
+    private Long bankUserId;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "creditCardApplicants" }, allowSetters = true)
-    private BankUser bankUser;
+    @Column(name = "credit_card_holder_id")
+    private Long creditCardHolderId;
 
-    @ManyToMany
-    @JoinTable(
-        name = "rel_credit_card_applicant__credit_card_type",
-        joinColumns = @JoinColumn(name = "credit_card_applicant_id"),
-        inverseJoinColumns = @JoinColumn(name = "credit_card_type_id")
-    )
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "creditCardApplicants" }, allowSetters = true)
-    private Set<CreditCardType> creditCardTypes = new HashSet<>();
+    @Column(name = "credit_card_type_id")
+    private Long creditCardTypeId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
-        return this.id;
+        return this.getId();
     }
 
     public CreditCardApplicant id(Long id) {
@@ -87,6 +102,19 @@ public class CreditCardApplicant implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public CreditCardApplicant name(String name) {
+        this.setName(name);
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public StandardStatus getStatus() {
@@ -100,6 +128,123 @@ public class CreditCardApplicant implements Serializable {
 
     public void setStatus(StandardStatus status) {
         this.status = status;
+    }
+
+    public String getIc() {
+        return this.ic;
+    }
+
+    public CreditCardApplicant ic(String ic) {
+        this.setIc(ic);
+        return this;
+    }
+
+    public void setIc(String ic) {
+        this.ic = ic;
+    }
+
+    public LocalDate getDob() {
+        return this.dob;
+    }
+
+    public CreditCardApplicant dob(LocalDate dob) {
+        this.setDob(dob);
+        return this;
+    }
+
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
+    }
+
+    public String getAddress() {
+        return this.address;
+    }
+
+    public CreditCardApplicant address(String address) {
+        this.setAddress(address);
+        return this;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return this.phone;
+    }
+
+    public CreditCardApplicant phone(String phone) {
+        this.setPhone(phone);
+        return this;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getSector() {
+        return this.sector;
+    }
+
+    public CreditCardApplicant sector(String sector) {
+        this.setSector(sector);
+        return this;
+    }
+
+    public void setSector(String sector) {
+        this.sector = sector;
+    }
+
+    public String getCompanyName() {
+        return this.companyName;
+    }
+
+    public CreditCardApplicant companyName(String companyName) {
+        this.setCompanyName(companyName);
+        return this;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public BigDecimal getServiceLength() {
+        return this.serviceLength;
+    }
+
+    public CreditCardApplicant serviceLength(BigDecimal serviceLength) {
+        this.setServiceLength(serviceLength);
+        return this;
+    }
+
+    public void setServiceLength(BigDecimal serviceLength) {
+        this.serviceLength = serviceLength;
+    }
+
+    public BigDecimal getAnnualIncome() {
+        return this.annualIncome;
+    }
+
+    public CreditCardApplicant annualIncome(BigDecimal annualIncome) {
+        this.setAnnualIncome(annualIncome);
+        return this;
+    }
+
+    public void setAnnualIncome(BigDecimal annualIncome) {
+        this.annualIncome = annualIncome;
+    }
+
+    public String getOccupation() {
+        return this.occupation;
+    }
+
+    public CreditCardApplicant occupation(String occupation) {
+        this.setOccupation(occupation);
+        return this;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
     }
 
     public String getIcPath() {
@@ -141,120 +286,47 @@ public class CreditCardApplicant implements Serializable {
         this.epfPath = epfPath;
     }
 
-    public BigDecimal getLimitAmount() {
-        return this.limitAmount;
-    }
-
-    public CreditCardApplicant limitAmount(BigDecimal limitAmount) {
-        this.setLimitAmount(limitAmount);
-        return this;
-    }
-
-    public void setLimitAmount(BigDecimal limitAmount) {
-        this.limitAmount = limitAmount;
-    }
-
-    public Instant getCreatedDate() {
-        return this.createdDate;
-    }
-
-    public CreditCardApplicant createdDate(Instant createdDate) {
-        this.setCreatedDate(createdDate);
-        return this;
-    }
-
-    public void setCreatedDate(Instant createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public String getCreatedBy() {
-        return this.createdBy;
-    }
-
-    public CreditCardApplicant createdBy(String createdBy) {
-        this.setCreatedBy(createdBy);
-        return this;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Instant getLastModifiedDate() {
-        return this.lastModifiedDate;
-    }
-
-    public CreditCardApplicant lastModifiedDate(Instant lastModifiedDate) {
-        this.setLastModifiedDate(lastModifiedDate);
-        return this;
-    }
-
-    public void setLastModifiedDate(Instant lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
-
-    public String getLastModifiedBy() {
-        return this.lastModifiedBy;
-    }
-
-    public CreditCardApplicant lastModifiedBy(String lastModifiedBy) {
-        this.setLastModifiedBy(lastModifiedBy);
-        return this;
-    }
-
     public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public CreditCardHolder getCreditCardHolder() {
-        return this.creditCardHolder;
+    public Long getBankUserId() {
+        return this.bankUserId;
     }
 
-    public void setCreditCardHolder(CreditCardHolder creditCardHolder) {
-        this.creditCardHolder = creditCardHolder;
-    }
-
-    public CreditCardApplicant creditCardHolder(CreditCardHolder creditCardHolder) {
-        this.setCreditCardHolder(creditCardHolder);
+    public CreditCardApplicant bankUserId(Long bankUserId) {
+        this.setBankUserId(bankUserId);
         return this;
     }
 
-    public BankUser getBankUser() {
-        return this.bankUser;
+    public void setBankUserId(Long bankUserId) {
+        this.bankUserId = bankUserId;
     }
 
-    public void setBankUser(BankUser bankUser) {
-        this.bankUser = bankUser;
+    public Long getCreditCardHolderId() {
+        return this.creditCardHolderId;
     }
 
-    public CreditCardApplicant bankUser(BankUser bankUser) {
-        this.setBankUser(bankUser);
+    public CreditCardApplicant creditCardHolderId(Long creditCardHolderId) {
+        this.setCreditCardHolderId(creditCardHolderId);
         return this;
     }
 
-    public Set<CreditCardType> getCreditCardTypes() {
-        return this.creditCardTypes;
+    public void setCreditCardHolderId(Long creditCardHolderId) {
+        this.creditCardHolderId = creditCardHolderId;
     }
 
-    public void setCreditCardTypes(Set<CreditCardType> creditCardTypes) {
-        this.creditCardTypes = creditCardTypes;
+    public Long getCreditCardTypeId() {
+        return this.creditCardTypeId;
     }
 
-    public CreditCardApplicant creditCardTypes(Set<CreditCardType> creditCardTypes) {
-        this.setCreditCardTypes(creditCardTypes);
+    public CreditCardApplicant creditCardTypeId(Long creditCardTypeId) {
+        this.setCreditCardTypeId(creditCardTypeId);
         return this;
     }
 
-    public CreditCardApplicant addCreditCardType(CreditCardType creditCardType) {
-        this.creditCardTypes.add(creditCardType);
-        creditCardType.getCreditCardApplicants().add(this);
-        return this;
-    }
-
-    public CreditCardApplicant removeCreditCardType(CreditCardType creditCardType) {
-        this.creditCardTypes.remove(creditCardType);
-        creditCardType.getCreditCardApplicants().remove(this);
-        return this;
+    public void setCreditCardTypeId(Long creditCardTypeId) {
+        this.creditCardTypeId = creditCardTypeId;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -281,15 +353,27 @@ public class CreditCardApplicant implements Serializable {
     public String toString() {
         return "CreditCardApplicant{" +
             "id=" + getId() +
+            ", name='" + getName() + "'" +
             ", status='" + getStatus() + "'" +
+            ", ic='" + getIc() + "'" +
+            ", dob='" + getDob() + "'" +
+            ", address='" + getAddress() + "'" +
+            ", phone='" + getPhone() + "'" +
+            ", sector='" + getSector() + "'" +
+            ", companyName='" + getCompanyName() + "'" +
+            ", serviceLength=" + getServiceLength() +
+            ", annualIncome=" + getAnnualIncome() +
+            ", occupation='" + getOccupation() + "'" +
             ", icPath='" + getIcPath() + "'" +
             ", payslipPath='" + getPayslipPath() + "'" +
             ", epfPath='" + getEpfPath() + "'" +
-            ", limitAmount=" + getLimitAmount() +
             ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", lastModifiedDate='" + getLastModifiedDate() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
+            ", bankUserId=" + getBankUserId() +
+            ", creditCardHolderId=" + getCreditCardHolderId() +
+            ", creditCardTypeId=" + getCreditCardTypeId() +
             "}";
     }
 }

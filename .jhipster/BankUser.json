@@ -87,9 +87,9 @@
   "readOnly": false,
   "relationships": [
     {
-      "otherEntityName": "creditCardApplicant",
+      "otherEntityName": "personalLoanApplicant",
       "otherEntityRelationshipName": "bankUser",
-      "relationshipName": "creditCardApplicant",
+      "relationshipName": "personalLoanApplicant",
       "relationshipType": "one-to-many"
     }
   ],

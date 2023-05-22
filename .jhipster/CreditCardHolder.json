@@ -24,6 +24,10 @@
       "fieldType": "Integer"
     },
     {
+      "fieldName": "limitAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
       "fieldName": "createdDate",
       "fieldType": "Instant"
     },
@@ -47,13 +51,6 @@
   "pagination": "no",
   "readOnly": false,
   "relationships": [
-    {
-      "otherEntityName": "creditCardApplicant",
-      "otherEntityRelationshipName": "creditCardHolder",
-      "ownerSide": false,
-      "relationshipName": "creditCardApplicant",
-      "relationshipType": "one-to-one"
-    },
     {
       "otherEntityName": "creditCardTransaction",
       "otherEntityRelationshipName": "creditCardHolder",

@@ -1,11 +1,8 @@
 package com.bank.app.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -58,11 +55,6 @@ public class CreditCardType implements Serializable {
 
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
-
-    @ManyToMany(mappedBy = "creditCardTypes")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "creditCardHolder", "bankUser", "creditCardTypes" }, allowSetters = true)
-    private Set<CreditCardApplicant> creditCardApplicants = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -220,37 +212,6 @@ public class CreditCardType implements Serializable {
 
     public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public Set<CreditCardApplicant> getCreditCardApplicants() {
-        return this.creditCardApplicants;
-    }
-
-    public void setCreditCardApplicants(Set<CreditCardApplicant> creditCardApplicants) {
-        if (this.creditCardApplicants != null) {
-            this.creditCardApplicants.forEach(i -> i.removeCreditCardType(this));
-        }
-        if (creditCardApplicants != null) {
-            creditCardApplicants.forEach(i -> i.addCreditCardType(this));
-        }
-        this.creditCardApplicants = creditCardApplicants;
-    }
-
-    public CreditCardType creditCardApplicants(Set<CreditCardApplicant> creditCardApplicants) {
-        this.setCreditCardApplicants(creditCardApplicants);
-        return this;
-    }
-
-    public CreditCardType addCreditCardApplicant(CreditCardApplicant creditCardApplicant) {
-        this.creditCardApplicants.add(creditCardApplicant);
-        creditCardApplicant.getCreditCardTypes().add(this);
-        return this;
-    }
-
-    public CreditCardType removeCreditCardApplicant(CreditCardApplicant creditCardApplicant) {
-        this.creditCardApplicants.remove(creditCardApplicant);
-        creditCardApplicant.getCreditCardTypes().remove(this);
-        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

@@ -2,6 +2,7 @@ package com.bank.app.web.rest;
 
 import com.bank.app.repository.CreditCardApplicantRepository;
 import com.bank.app.service.CreditCardApplicantService;
+import com.bank.app.service.FileStorageService;
 import com.bank.app.service.dto.CreditCardApplicantDTO;
 import com.bank.app.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -9,11 +10,13 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import jodd.net.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
@@ -35,12 +38,29 @@ public class CreditCardApplicantResource {
 
     private final CreditCardApplicantRepository creditCardApplicantRepository;
 
+    private final FileStorageService fileStorageService;
+
     public CreditCardApplicantResource(
         CreditCardApplicantService creditCardApplicantService,
-        CreditCardApplicantRepository creditCardApplicantRepository
+        CreditCardApplicantRepository creditCardApplicantRepository,
+        FileStorageService fileStorageService
     ) {
         this.creditCardApplicantService = creditCardApplicantService;
         this.creditCardApplicantRepository = creditCardApplicantRepository;
+        this.fileStorageService = fileStorageService;
+    }
+
+    @PostMapping("/upload-ic")
+    public ResponseEntity<?> uploadIcFile(@RequestParam("file") MultipartFile file) {
+        String message = "";
+        try {
+            fileStorageService.save(file);
+            message = "Uploaded the file successfully: " + file.getOriginalFilename();
+            return ResponseEntity.ok("");
+        } catch (Exception e) {
+            message = "Could not upload the file: " + file.getOriginalFilename() + ". Error: " + e.getMessage();
+            return ResponseEntity.badRequest().body("Faile to upload file");
+        }
     }
 
     /**

@@ -82,11 +82,6 @@ public class BankUser implements Serializable {
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
 
-    @OneToMany(mappedBy = "bankUser")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "creditCardHolder", "bankUser", "creditCardTypes" }, allowSetters = true)
-    private Set<CreditCardApplicant> creditCardApplicants = new HashSet<>();
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -321,37 +316,6 @@ public class BankUser implements Serializable {
 
     public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public Set<CreditCardApplicant> getCreditCardApplicants() {
-        return this.creditCardApplicants;
-    }
-
-    public void setCreditCardApplicants(Set<CreditCardApplicant> creditCardApplicants) {
-        if (this.creditCardApplicants != null) {
-            this.creditCardApplicants.forEach(i -> i.setBankUser(null));
-        }
-        if (creditCardApplicants != null) {
-            creditCardApplicants.forEach(i -> i.setBankUser(this));
-        }
-        this.creditCardApplicants = creditCardApplicants;
-    }
-
-    public BankUser creditCardApplicants(Set<CreditCardApplicant> creditCardApplicants) {
-        this.setCreditCardApplicants(creditCardApplicants);
-        return this;
-    }
-
-    public BankUser addCreditCardApplicant(CreditCardApplicant creditCardApplicant) {
-        this.creditCardApplicants.add(creditCardApplicant);
-        creditCardApplicant.setBankUser(this);
-        return this;
-    }
-
-    public BankUser removeCreditCardApplicant(CreditCardApplicant creditCardApplicant) {
-        this.creditCardApplicants.remove(creditCardApplicant);
-        creditCardApplicant.setBankUser(null);
-        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

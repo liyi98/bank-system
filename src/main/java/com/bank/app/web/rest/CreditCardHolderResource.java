@@ -9,7 +9,6 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -138,15 +137,10 @@ public class CreditCardHolderResource {
     /**
      * {@code GET  /credit-card-holders} : get all the creditCardHolders.
      *
-     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of creditCardHolders in body.
      */
     @GetMapping("/credit-card-holders")
-    public List<CreditCardHolderDTO> getAllCreditCardHolders(@RequestParam(required = false) String filter) {
-        if ("creditcardapplicant-is-null".equals(filter)) {
-            log.debug("REST request to get all CreditCardHolders where creditCardApplicant is null");
-            return creditCardHolderService.findAllWhereCreditCardApplicantIsNull();
-        }
+    public List<CreditCardHolderDTO> getAllCreditCardHolders() {
         log.debug("REST request to get all CreditCardHolders");
         return creditCardHolderService.findAll();
     }

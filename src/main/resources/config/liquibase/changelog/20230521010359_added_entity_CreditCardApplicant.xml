@@ -14,7 +14,37 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="status" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="ic" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="dob" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="address" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="phone" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="sector" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="company_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="service_length" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="annual_income" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="occupation" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="ic_path" type="varchar(255)">
@@ -24,9 +54,6 @@
                 <constraints nullable="true" />
             </column>
             <column name="epf_path" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="limit_amount" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
             <column name="created_date" type="${datetimeType}">
@@ -41,30 +68,19 @@
             <column name="last_modified_by" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="credit_card_holder_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_credit_card_applicant__credit_card_holder_id" />
-            </column>
             <column name="bank_user_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="credit_card_holder_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="credit_card_type_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
         <dropDefaultValue tableName="credit_card_applicant" columnName="created_date" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="credit_card_applicant" columnName="last_modified_date" columnDataType="${datetimeType}"/>
-    </changeSet>
-
-    <changeSet id="20230521010359-1-relations" author="jhipster">
-
-        <createTable tableName="rel_credit_card_applicant__credit_card_type">
-            <column name="credit_card_type_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="credit_card_applicant_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="credit_card_applicant_id, credit_card_type_id" tableName="rel_credit_card_applicant__credit_card_type"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -84,15 +100,27 @@
                   tableName="credit_card_applicant"
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
+            <column name="name" type="string"/>
             <column name="status" type="string"/>
+            <column name="ic" type="string"/>
+            <column name="dob" type="date"/>
+            <column name="address" type="string"/>
+            <column name="phone" type="string"/>
+            <column name="sector" type="string"/>
+            <column name="company_name" type="string"/>
+            <column name="service_length" type="numeric"/>
+            <column name="annual_income" type="numeric"/>
+            <column name="occupation" type="string"/>
             <column name="ic_path" type="string"/>
             <column name="payslip_path" type="string"/>
             <column name="epf_path" type="string"/>
-            <column name="limit_amount" type="numeric"/>
             <column name="created_date" type="date"/>
             <column name="created_by" type="string"/>
             <column name="last_modified_date" type="date"/>
             <column name="last_modified_by" type="string"/>
+            <column name="bank_user_id" type="numeric"/>
+            <column name="credit_card_holder_id" type="numeric"/>
+            <column name="credit_card_type_id" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

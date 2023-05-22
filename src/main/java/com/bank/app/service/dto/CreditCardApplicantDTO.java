@@ -4,9 +4,8 @@ import com.bank.app.domain.enumeration.StandardStatus;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.HashSet;
+import java.time.LocalDate;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * A DTO for the {@link com.bank.app.domain.CreditCardApplicant} entity.
@@ -16,15 +15,33 @@ public class CreditCardApplicantDTO implements Serializable {
 
     private Long id;
 
+    private String name;
+
     private StandardStatus status;
+
+    private String ic;
+
+    private LocalDate dob;
+
+    private String address;
+
+    private String phone;
+
+    private String sector;
+
+    private String companyName;
+
+    private BigDecimal serviceLength;
+
+    private BigDecimal annualIncome;
+
+    private String occupation;
 
     private String icPath;
 
     private String payslipPath;
 
     private String epfPath;
-
-    private BigDecimal limitAmount;
 
     private Instant createdDate;
 
@@ -34,11 +51,11 @@ public class CreditCardApplicantDTO implements Serializable {
 
     private String lastModifiedBy;
 
-    private CreditCardHolderDTO creditCardHolder;
+    private Long bankUserId;
 
-    private BankUserDTO bankUser;
+    private Long creditCardHolderId;
 
-    private Set<CreditCardTypeDTO> creditCardTypes = new HashSet<>();
+    private Long creditCardTypeId;
 
     public Long getId() {
         return id;
@@ -48,12 +65,92 @@ public class CreditCardApplicantDTO implements Serializable {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public StandardStatus getStatus() {
         return status;
     }
 
     public void setStatus(StandardStatus status) {
         this.status = status;
+    }
+
+    public String getIc() {
+        return ic;
+    }
+
+    public void setIc(String ic) {
+        this.ic = ic;
+    }
+
+    public LocalDate getDob() {
+        return dob;
+    }
+
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getSector() {
+        return sector;
+    }
+
+    public void setSector(String sector) {
+        this.sector = sector;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public BigDecimal getServiceLength() {
+        return serviceLength;
+    }
+
+    public void setServiceLength(BigDecimal serviceLength) {
+        this.serviceLength = serviceLength;
+    }
+
+    public BigDecimal getAnnualIncome() {
+        return annualIncome;
+    }
+
+    public void setAnnualIncome(BigDecimal annualIncome) {
+        this.annualIncome = annualIncome;
+    }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
     }
 
     public String getIcPath() {
@@ -78,14 +175,6 @@ public class CreditCardApplicantDTO implements Serializable {
 
     public void setEpfPath(String epfPath) {
         this.epfPath = epfPath;
-    }
-
-    public BigDecimal getLimitAmount() {
-        return limitAmount;
-    }
-
-    public void setLimitAmount(BigDecimal limitAmount) {
-        this.limitAmount = limitAmount;
     }
 
     public Instant getCreatedDate() {
@@ -120,28 +209,28 @@ public class CreditCardApplicantDTO implements Serializable {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public CreditCardHolderDTO getCreditCardHolder() {
-        return creditCardHolder;
+    public Long getBankUserId() {
+        return bankUserId;
     }
 
-    public void setCreditCardHolder(CreditCardHolderDTO creditCardHolder) {
-        this.creditCardHolder = creditCardHolder;
+    public void setBankUserId(Long bankUserId) {
+        this.bankUserId = bankUserId;
     }
 
-    public BankUserDTO getBankUser() {
-        return bankUser;
+    public Long getCreditCardHolderId() {
+        return creditCardHolderId;
     }
 
-    public void setBankUser(BankUserDTO bankUser) {
-        this.bankUser = bankUser;
+    public void setCreditCardHolderId(Long creditCardHolderId) {
+        this.creditCardHolderId = creditCardHolderId;
     }
 
-    public Set<CreditCardTypeDTO> getCreditCardTypes() {
-        return creditCardTypes;
+    public Long getCreditCardTypeId() {
+        return creditCardTypeId;
     }
 
-    public void setCreditCardTypes(Set<CreditCardTypeDTO> creditCardTypes) {
-        this.creditCardTypes = creditCardTypes;
+    public void setCreditCardTypeId(Long creditCardTypeId) {
+        this.creditCardTypeId = creditCardTypeId;
     }
 
     @Override
@@ -170,18 +259,27 @@ public class CreditCardApplicantDTO implements Serializable {
     public String toString() {
         return "CreditCardApplicantDTO{" +
             "id=" + getId() +
+            ", name='" + getName() + "'" +
             ", status='" + getStatus() + "'" +
+            ", ic='" + getIc() + "'" +
+            ", dob='" + getDob() + "'" +
+            ", address='" + getAddress() + "'" +
+            ", phone='" + getPhone() + "'" +
+            ", sector='" + getSector() + "'" +
+            ", companyName='" + getCompanyName() + "'" +
+            ", serviceLength=" + getServiceLength() +
+            ", annualIncome=" + getAnnualIncome() +
+            ", occupation='" + getOccupation() + "'" +
             ", icPath='" + getIcPath() + "'" +
             ", payslipPath='" + getPayslipPath() + "'" +
             ", epfPath='" + getEpfPath() + "'" +
-            ", limitAmount=" + getLimitAmount() +
             ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", lastModifiedDate='" + getLastModifiedDate() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", creditCardHolder=" + getCreditCardHolder() +
-            ", bankUser=" + getBankUser() +
-            ", creditCardTypes=" + getCreditCardTypes() +
+            ", bankUserId=" + getBankUserId() +
+            ", creditCardHolderId=" + getCreditCardHolderId() +
+            ", creditCardTypeId=" + getCreditCardTypeId() +
             "}";
     }
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity PersonalLoan.
+    -->
+    <changeSet id="20230522081848-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="personal_loan_id"
+                                 baseTableName="rel_personal_loan__personal_loan_applicant"
+                                 constraintName="fk_rel_personal_loan__personal_loan_applicant__personal_loan_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="personal_loan"/>
+
+        <addForeignKeyConstraint baseColumnNames="personal_loan_applicant_id"
+                                 baseTableName="rel_personal_loan__personal_loan_applicant"
+                                 constraintName="fk_rel_personal_loan__personal___personal_loan_applicant_23_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="personal_loan_applicant"/>
+    </changeSet>
+</databaseChangeLog>

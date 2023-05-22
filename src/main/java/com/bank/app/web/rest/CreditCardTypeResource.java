@@ -47,7 +47,7 @@ public class CreditCardTypeResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new creditCardTypeDTO, or with status {@code 400 (Bad Request)} if the creditCardType has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PostMapping("/credit-card-types")
+    @PostMapping("/add-credit-card-types")
     public ResponseEntity<CreditCardTypeDTO> createCreditCardType(@RequestBody CreditCardTypeDTO creditCardTypeDTO)
         throws URISyntaxException {
         log.debug("REST request to save CreditCardType : {}", creditCardTypeDTO);

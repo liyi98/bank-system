@@ -1,6 +1,7 @@
 package com.bank.app.service.dto;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -20,6 +21,8 @@ public class CreditCardHolderDTO implements Serializable {
     private LocalDate expiredDate;
 
     private Integer secureNumber;
+
+    private BigDecimal limitAmount;
 
     private Instant createdDate;
 
@@ -67,6 +70,14 @@ public class CreditCardHolderDTO implements Serializable {
 
     public void setSecureNumber(Integer secureNumber) {
         this.secureNumber = secureNumber;
+    }
+
+    public BigDecimal getLimitAmount() {
+        return limitAmount;
+    }
+
+    public void setLimitAmount(BigDecimal limitAmount) {
+        this.limitAmount = limitAmount;
     }
 
     public Instant getCreatedDate() {
@@ -131,6 +142,7 @@ public class CreditCardHolderDTO implements Serializable {
             ", name='" + getName() + "'" +
             ", expiredDate='" + getExpiredDate() + "'" +
             ", secureNumber=" + getSecureNumber() +
+            ", limitAmount=" + getLimitAmount() +
             ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", lastModifiedDate='" + getLastModifiedDate() + "'" +

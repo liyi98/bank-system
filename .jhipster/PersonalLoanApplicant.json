@@ -1,0 +1,60 @@
+{
+  "applications": "*",
+  "changelogDate": "20230522081849",
+  "clientRootFolder": "bank",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "personal_loan_applicant",
+  "fields": [
+    {
+      "fieldName": "status",
+      "fieldType": "StandardStatus",
+      "fieldValues": "P,A,I"
+    },
+    {
+      "fieldName": "icPath",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "payslipPath",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "epfPath",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "loanAmount",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "bank",
+  "name": "PersonalLoanApplicant",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "bankUser",
+      "otherEntityRelationshipName": "personalLoanApplicant",
+      "relationshipName": "bankUser",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "personalLoanTransaction",
+      "otherEntityRelationshipName": "personalLoanApplicant",
+      "relationshipName": "personalLoanTransaction",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "personalLoan",
+      "otherEntityRelationshipName": "personalLoanApplicant",
+      "ownerSide": false,
+      "relationshipName": "personalLoan",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

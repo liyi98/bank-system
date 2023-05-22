@@ -1,6 +1,7 @@
 package com.bank.app.service;
 
 import com.bank.app.domain.CreditCardApplicant;
+import com.bank.app.domain.enumeration.StandardStatus;
 import com.bank.app.repository.CreditCardApplicantRepository;
 import com.bank.app.service.dto.CreditCardApplicantDTO;
 import com.bank.app.service.mapper.CreditCardApplicantMapper;
@@ -10,8 +11,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,6 +43,7 @@ public class CreditCardApplicantService {
      */
     public CreditCardApplicantDTO save(CreditCardApplicantDTO creditCardApplicantDTO) {
         log.debug("Request to save CreditCardApplicant : {}", creditCardApplicantDTO);
+        creditCardApplicantDTO.setStatus(StandardStatus.P);
         CreditCardApplicant creditCardApplicant = creditCardApplicantMapper.toEntity(creditCardApplicantDTO);
         creditCardApplicant = creditCardApplicantRepository.save(creditCardApplicant);
         return creditCardApplicantMapper.toDto(creditCardApplicant);
@@ -98,15 +98,6 @@ public class CreditCardApplicantService {
     }
 
     /**
-     * Get all the creditCardApplicants with eager load of many-to-many relationships.
-     *
-     * @return the list of entities.
-     */
-    public Page<CreditCardApplicantDTO> findAllWithEagerRelationships(Pageable pageable) {
-        return creditCardApplicantRepository.findAllWithEagerRelationships(pageable).map(creditCardApplicantMapper::toDto);
-    }
-
-    /**
      * Get one creditCardApplicant by id.
      *
      * @param id the id of the entity.
@@ -115,7 +106,7 @@ public class CreditCardApplicantService {
     @Transactional(readOnly = true)
     public Optional<CreditCardApplicantDTO> findOne(Long id) {
         log.debug("Request to get CreditCardApplicant : {}", id);
-        return creditCardApplicantRepository.findOneWithEagerRelationships(id).map(creditCardApplicantMapper::toDto);
+        return creditCardApplicantRepository.findById(id).map(creditCardApplicantMapper::toDto);
     }
 
     /**

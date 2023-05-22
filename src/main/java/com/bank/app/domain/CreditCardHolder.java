@@ -2,6 +2,7 @@ package com.bank.app.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -38,6 +39,9 @@ public class CreditCardHolder implements Serializable {
     @Column(name = "secure_number")
     private Integer secureNumber;
 
+    @Column(name = "limit_amount", precision = 21, scale = 2)
+    private BigDecimal limitAmount;
+
     @Column(name = "created_date")
     private Instant createdDate;
 
@@ -49,10 +53,6 @@ public class CreditCardHolder implements Serializable {
 
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
-
-    @JsonIgnoreProperties(value = { "creditCardHolder", "bankUser", "creditCardTypes" }, allowSetters = true)
-    @OneToOne(mappedBy = "creditCardHolder")
-    private CreditCardApplicant creditCardApplicant;
 
     @OneToMany(mappedBy = "creditCardHolder")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -126,6 +126,19 @@ public class CreditCardHolder implements Serializable {
         this.secureNumber = secureNumber;
     }
 
+    public BigDecimal getLimitAmount() {
+        return this.limitAmount;
+    }
+
+    public CreditCardHolder limitAmount(BigDecimal limitAmount) {
+        this.setLimitAmount(limitAmount);
+        return this;
+    }
+
+    public void setLimitAmount(BigDecimal limitAmount) {
+        this.limitAmount = limitAmount;
+    }
+
     public Instant getCreatedDate() {
         return this.createdDate;
     }
@@ -176,25 +189,6 @@ public class CreditCardHolder implements Serializable {
 
     public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public CreditCardApplicant getCreditCardApplicant() {
-        return this.creditCardApplicant;
-    }
-
-    public void setCreditCardApplicant(CreditCardApplicant creditCardApplicant) {
-        if (this.creditCardApplicant != null) {
-            this.creditCardApplicant.setCreditCardHolder(null);
-        }
-        if (creditCardApplicant != null) {
-            creditCardApplicant.setCreditCardHolder(this);
-        }
-        this.creditCardApplicant = creditCardApplicant;
-    }
-
-    public CreditCardHolder creditCardApplicant(CreditCardApplicant creditCardApplicant) {
-        this.setCreditCardApplicant(creditCardApplicant);
-        return this;
     }
 
     public Set<CreditCardTransaction> getCreditCardTransactions() {
@@ -256,6 +250,7 @@ public class CreditCardHolder implements Serializable {
             ", name='" + getName() + "'" +
             ", expiredDate='" + getExpiredDate() + "'" +
             ", secureNumber=" + getSecureNumber() +
+            ", limitAmount=" + getLimitAmount() +
             ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", lastModifiedDate='" + getLastModifiedDate() + "'" +

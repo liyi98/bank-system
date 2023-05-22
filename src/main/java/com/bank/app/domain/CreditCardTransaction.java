@@ -45,7 +45,7 @@ public class CreditCardTransaction implements Serializable {
     private String lastModifiedBy;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "creditCardApplicant", "creditCardTransactions" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "creditCardTransactions" }, allowSetters = true)
     private CreditCardHolder creditCardHolder;
 
     @ManyToMany
