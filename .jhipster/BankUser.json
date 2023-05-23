@@ -93,5 +93,5 @@
       "relationshipType": "one-to-many"
     }
   ],
-  "service": "serviceClass"
+  "service": "serviceImpl"
 }

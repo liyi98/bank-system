@@ -47,5 +47,5 @@
       "relationshipType": "many-to-many"
     }
   ],
-  "service": "serviceClass"
+  "service": "serviceImpl"
 }

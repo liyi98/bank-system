@@ -15,9 +15,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CreditCardHolderRepository extends JpaRepository<CreditCardHolder, Long> {
     @Modifying
-    @Query(
-        "update CreditCardHolder c set c.bankUserId = :bankUserId and c.limitAmount = :limitAmount " +
-        "where (SELECT cc.max(id) FROM CreditCardHolder)"
-    )
+    @Query("update CreditCardHolder c set c.bankUserId = :bankUserId, c.limitAmount = :limitAmount where id = 1 ")
     int updateBankUserIdAndLimit(@Param("bankUserId") Long bankUserId, @Param("limitAmount") BigDecimal limitAmount);
 }

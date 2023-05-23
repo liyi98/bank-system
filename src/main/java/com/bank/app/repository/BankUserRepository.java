@@ -1,7 +1,8 @@
 package com.bank.app.repository;
 
 import com.bank.app.domain.BankUser;
-import org.springframework.data.jpa.repository.*;
+import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,4 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface BankUserRepository extends JpaRepository<BankUser, Long> {}
+public interface BankUserRepository extends JpaRepository<BankUser, Long> {
+    Optional<BankUser> findOneByLogin(String login);
+}

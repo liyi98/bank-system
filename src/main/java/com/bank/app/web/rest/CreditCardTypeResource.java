@@ -1,8 +1,10 @@
 package com.bank.app.web.rest;
 
 import com.bank.app.repository.CreditCardTypeRepository;
+import com.bank.app.security.SecurityUtils;
 import com.bank.app.service.CreditCardTypeService;
 import com.bank.app.service.dto.CreditCardTypeDTO;
+import com.bank.app.service.exception.AuthenticationException;
 import com.bank.app.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -13,7 +15,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
@@ -47,7 +57,7 @@ public class CreditCardTypeResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new creditCardTypeDTO, or with status {@code 400 (Bad Request)} if the creditCardType has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PostMapping("/add-credit-card-types")
+    @PostMapping("/credit-card-types")
     public ResponseEntity<CreditCardTypeDTO> createCreditCardType(@RequestBody CreditCardTypeDTO creditCardTypeDTO)
         throws URISyntaxException {
         log.debug("REST request to save CreditCardType : {}", creditCardTypeDTO);
@@ -70,6 +80,7 @@ public class CreditCardTypeResource {
      * or with status {@code 400 (Bad Request)} if the creditCardTypeDTO is not valid,
      * or with status {@code 500 (Internal Server Error)} if the creditCardTypeDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
+     * @throws AuthenticationException
      */
     @PutMapping("/credit-card-types/{id}")
     public ResponseEntity<CreditCardTypeDTO> updateCreditCardType(
@@ -135,10 +146,15 @@ public class CreditCardTypeResource {
      * {@code GET  /credit-card-types} : get all the creditCardTypes.
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of creditCardTypes in body.
+     * @throws AuthenticationException
      */
     @GetMapping("/credit-card-types")
-    public List<CreditCardTypeDTO> getAllCreditCardTypes() {
-        log.debug("REST request to get all CreditCardTypes");
+    public List<CreditCardTypeDTO> getAllCreditCardTypes() throws AuthenticationException {
+        log.info("REST request to get all CreditCardTypes");
+        String login = SecurityUtils.getCurrentUserLogin();
+
+        log.info("login : {}", login);
+
         return creditCardTypeService.findAll();
     }
 

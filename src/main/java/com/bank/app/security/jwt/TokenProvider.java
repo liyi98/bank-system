@@ -1,21 +1,26 @@
 package com.bank.app.security.jwt;
 
 import com.bank.app.management.SecurityMetersService;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtParser;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import tech.jhipster.config.JHipsterProperties;
@@ -76,24 +81,27 @@ public class TokenProvider {
         return Jwts
             .builder()
             .setSubject(authentication.getName())
-            .claim(AUTHORITIES_KEY, authorities)
             .signWith(key, SignatureAlgorithm.HS512)
             .setExpiration(validity)
             .compact();
     }
 
     public Authentication getAuthentication(String token) {
+        log.info("JWT Parse : {}", jwtParser.parseClaimsJws(token));
+
         Claims claims = jwtParser.parseClaimsJws(token).getBody();
 
-        Collection<? extends GrantedAuthority> authorities = Arrays
-            .stream(claims.get(AUTHORITIES_KEY).toString().split(","))
-            .filter(auth -> !auth.trim().isEmpty())
-            .map(SimpleGrantedAuthority::new)
-            .collect(Collectors.toList());
+        //        Collection<? extends GrantedAuthority> authorities = Arrays
+        //            .stream(claims.get(AUTHORITIES_KEY).toString().split(","))
+        //            .filter(auth -> !auth.trim().isEmpty())
+        //            .map(SimpleGrantedAuthority::new)
+        //            .collect(Collectors.toList());
 
-        User principal = new User(claims.getSubject(), "", authorities);
+        //        User principal = new User(claims.getSubject(), "", new List<GrantedAuthority>());
 
-        return new UsernamePasswordAuthenticationToken(principal, token, authorities);
+        log.info(" here");
+
+        return new UsernamePasswordAuthenticationToken(claims.getSubject(), token, new ArrayList<GrantedAuthority>());
     }
 
     public boolean validateToken(String authToken) {

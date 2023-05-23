@@ -143,10 +143,12 @@ public class CreditCardApplicantServiceImpl implements CreditCardApplicantServic
             throw new CreditCardException("This applicant done proceed");
         }
         creditCardApplicant.setStatus(StandardStatus.A);
-
+        creditCardApplicant.setEmail("ly199808@gmail.com");
         creditCardApplicantRepository.save(creditCardApplicant);
 
         BankUserDTO bankUserDTO = new BankUserDTO();
+        bankUserDTO.setLastName(creditCardApplicant.getName());
+        bankUserDTO.setFirstName(creditCardApplicant.getName());
         bankUserDTO.setAddress(creditCardApplicant.getAddress());
         bankUserDTO.setDob(creditCardApplicant.getDob());
         bankUserDTO.setIc(creditCardApplicant.getIc());

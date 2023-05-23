@@ -1,8 +1,11 @@
 package com.bank.app.security;
 
+import com.bank.app.service.exception.AuthenticationException;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Stream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -14,16 +17,26 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 public final class SecurityUtils {
 
+    private static final Logger log = LoggerFactory.getLogger(SecurityUtils.class);
+
     private SecurityUtils() {}
 
     /**
      * Get the login of the current user.
      *
      * @return the login of the current user.
+     * @throws AuthenticationException
      */
-    public static Optional<String> getCurrentUserLogin() {
+    public static String getCurrentUserLogin() throws AuthenticationException {
+        log.info("pass hhh");
+
         SecurityContext securityContext = SecurityContextHolder.getContext();
-        return Optional.ofNullable(extractPrincipal(securityContext.getAuthentication()));
+
+        log.info("pass here");
+        if (extractPrincipal(securityContext.getAuthentication()) == null) {
+            throw new AuthenticationException("User do not have login");
+        }
+        return extractPrincipal(securityContext.getAuthentication());
     }
 
     private static String extractPrincipal(Authentication authentication) {
