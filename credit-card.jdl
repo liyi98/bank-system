@@ -7,6 +7,16 @@ enum UserStatus {
     A, I
 }
 
+entity Admin {
+    login String
+    password String
+    name String
+    createdDate Instant
+    createdBy String
+    lastModifiedDate Instant
+    lastModifiedBy String
+}
+
 entity BankUser {
     login String 
     password String

@@ -20,8 +20,8 @@
     <include file="config/liquibase/changelog/20230522081848_added_entity_PersonalLoan.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230522081849_added_entity_PersonalLoanApplicant.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230522081850_added_entity_PersonalLoanTransaction.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230807225836_added_entity_Admin.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
-    <include file="config/liquibase/changelog/20230521010359_added_entity_constraints_CreditCardApplicant.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230521010401_added_entity_constraints_CreditCardTransaction.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230522081848_added_entity_constraints_PersonalLoan.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230522081849_added_entity_constraints_PersonalLoanApplicant.xml" relativeToChangelogFile="false"/>

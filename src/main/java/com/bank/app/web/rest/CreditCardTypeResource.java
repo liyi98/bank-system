@@ -148,7 +148,7 @@ public class CreditCardTypeResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of creditCardTypes in body.
      * @throws AuthenticationException
      */
-    @GetMapping("/credit-card-types")
+    @GetMapping("/p/credit-card-types")
     public List<CreditCardTypeDTO> getAllCreditCardTypes() throws AuthenticationException {
         log.info("REST request to get all CreditCardTypes");
         String login = SecurityUtils.getCurrentUserLogin();

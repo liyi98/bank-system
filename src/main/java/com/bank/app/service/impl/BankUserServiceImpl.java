@@ -43,6 +43,7 @@ public class BankUserServiceImpl implements BankUserService {
     @Override
     public BankUserDTO save(BankUserDTO bankUserDTO) {
         log.debug("Request to save BankUser : {}", bankUserDTO);
+        bankUserDTO.setPassword(new BCryptPasswordEncoder().encode(bankUserDTO.getPassword()));
         BankUser bankUser = bankUserMapper.toEntity(bankUserDTO);
         bankUser = bankUserRepository.save(bankUser);
         return bankUserMapper.toDto(bankUser);
@@ -103,12 +104,14 @@ public class BankUserServiceImpl implements BankUserService {
         if (!new BCryptPasswordEncoder().matches(bankUserLoginDTO.getPassword(), user.getPassword())) {
             throw new AuthenticationException("Invalid Username or Password");
         }
+
         String token = tokenProvider.createToken(
             new UsernamePasswordAuthenticationToken(
                 bankUserLoginDTO.getLogin(),
                 new BCryptPasswordEncoder().encode(bankUserLoginDTO.getPassword())
             ),
-            bankUserLoginDTO.isRememberMe()
+            bankUserLoginDTO.isRememberMe(),
+            false
         );
 
         return token;
